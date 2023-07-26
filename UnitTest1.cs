@@ -32,10 +32,11 @@ namespace JenkinsTestProject
 
             new WebDriverWait(_driver, TimeSpan.FromSeconds(15))
                 .Until(driver => driver.FindElements(By.XPath(xpath)).Count > 0);
-                
-
+            
             _driver.FindElement(By.XPath(xpath)).SendKeys(Environment.GetEnvironmentVariable("GoogleSearch", 
                 EnvironmentVariableTarget.Machine));
+
+            (_driver as ITakesScreenshot).GetScreenshot().SaveAsFile("test.png", ScreenshotImageFormat.Png);
 
             Thread.Sleep(3000);
 
